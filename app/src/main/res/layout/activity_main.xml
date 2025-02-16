@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Username Input -->
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Username"
+        android:inputType="text" />
+
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <!-- NI Number Input -->
+    <EditText
+        android:id="@+id/et_ninumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="NI Number"
+        android:inputType="text" />
+
+    <!-- Button to Hash the Password -->
+    <Button
+        android:id="@+id/btn_hash_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hash Password" />
+
+    <!-- TextView to Display Hash Result -->
+    <TextView
+        android:id="@+id/tv_hash_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:text="Hashed password will be displayed here..." />
+
+    <!-- Button to Encrypt the NI Number -->
+    <Button
+        android:id="@+id/btn_encrypt_ni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Encrypt NI Number" />
+
+    <!-- TextView to Display Encryption Result -->
+    <TextView
+        android:id="@+id/tv_encrypt_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:text="Encrypted NI Number will be displayed here..." />
+
+    <!-- Button to Decrypt the NI Number -->
+    <Button
+        android:id="@+id/btn_decrypt_ni"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Decrypt NI Number" />
+
+    <!-- TextView to Display Decryption Result -->
+    <TextView
+        android:id="@+id/tv_decrypt_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:text="Decrypted NI Number will be displayed here..." />
+
+    <!-- Button to Register the User -->
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register" />
+
+    <!-- Button to Login the User -->
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+
+    <!-- TextView to Display the Login or Registration Result -->
+    <TextView
+        android:id="@+id/tv_login_register_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:text="Login/Register results will be displayed here..." />
+
+</LinearLayout>
