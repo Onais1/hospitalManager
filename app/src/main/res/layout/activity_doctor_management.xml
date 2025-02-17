@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Input Fields -->
+    <EditText
+        android:id="@+id/etDoctorName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Doctor Name" />
+
+    <EditText
+        android:id="@+id/etDoctorSpecialization"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Specialization" />
+
+    <EditText
+        android:id="@+id/etDoctorPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone" />
+
+    <EditText
+        android:id="@+id/etDoctorEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email" />
+
+    <!-- Buttons -->
+    <Button
+        android:id="@+id/btnAddDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Doctor"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnUpdateDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Doctor"
+        android:layout_marginTop="8dp" />
+
+    <!-- ListView to Display Doctors -->
+    <ListView
+        android:id="@+id/lvDoctors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

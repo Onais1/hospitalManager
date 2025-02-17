@@ -1,0 +1,145 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Username Input -->
+        <EditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:inputType="text"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <!-- Password Input -->
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_below="@id/et_username"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <!-- NI Number Input -->
+        <EditText
+            android:id="@+id/et_ninumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="NI Number (e.g., AB123456C)"
+            android:inputType="text"
+            android:layout_below="@id/et_password"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:background="@drawable/edittext_background"/>
+
+        <!-- Hash Password Button -->
+        <Button
+            android:id="@+id/btn_hash_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hash Password"
+            android:layout_below="@id/et_ninumber"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"
+            android:textAllCaps="false"/>
+
+        <!-- Hash Result TextView -->
+        <TextView
+            android:id="@+id/tv_hash_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hash Result"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/btn_hash_password"
+            android:visibility="gone"/> <!-- Initially hidden -->
+
+        <!-- Encrypt NI Number Button -->
+        <Button
+            android:id="@+id/btn_encrypt_ni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Encrypt NI Number"
+            android:layout_below="@id/tv_hash_result"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"
+            android:textAllCaps="false"/>
+
+        <!-- Encrypt Result TextView -->
+        <TextView
+            android:id="@+id/tv_encrypt_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Encrypt Result"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/btn_encrypt_ni"
+            android:visibility="gone"/> <!-- Initially hidden -->
+
+        <!-- Decrypt NI Number Button -->
+        <Button
+            android:id="@+id/btn_decrypt_ni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Decrypt NI Number"
+            android:layout_below="@id/tv_encrypt_result"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"
+            android:textAllCaps="false"/>
+
+        <!-- Decrypt Result TextView -->
+        <TextView
+            android:id="@+id/tv_decrypt_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Decrypt Result"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/btn_decrypt_ni"
+            android:visibility="gone"/> <!-- Initially hidden -->
+
+        <!-- Register Button -->
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:layout_below="@id/tv_decrypt_result"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"
+            android:textAllCaps="false"/>
+
+        <!-- Login Link -->
+        <TextView
+            android:id="@+id/tv_login_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Login here"
+            android:textColor="@color/purple_500"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/btn_register"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Login/Register Result TextView -->
+        <TextView
+            android:id="@+id/tv_login_register_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login/Register Result"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/tv_login_link"
+            android:visibility="gone"/> <!-- Initially hidden -->
+    </RelativeLayout>
+</ScrollView>

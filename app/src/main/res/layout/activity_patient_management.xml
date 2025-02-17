@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Input fields for patient details -->
+    <EditText
+        android:id="@+id/et_patient_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Patient Name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/et_patient_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Patient Age"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/et_patient_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Patient Gender"
+        android:inputType="text" />
+
+    <!-- Buttons for adding and updating patients -->
+    <Button
+        android:id="@+id/btn_add_patient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Patient" />
+
+    <Button
+        android:id="@+id/btn_update_patient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Patient" />
+
+    <!-- ListView to display patient details dynamically -->
+    <ListView
+        android:id="@+id/lv_patients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"/>
+</LinearLayout>
