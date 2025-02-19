@@ -142,13 +142,13 @@ public class DoctorManagementActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Delete Doctor")
                 .setMessage("Are you sure you want to delete this doctor?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         deleteDoctor(position);
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton("No", null)
                 .show();
     }
 

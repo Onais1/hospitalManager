@@ -152,7 +152,7 @@ public class PatientManagement extends AppCompatActivity {
 
         new AlertDialog.Builder(this)
                 .setTitle("Delete Patient")
-                .setMessage("Are you sure you want to delete " + patientName + "?")
+                .setMessage("Are you sure you want to delete this Patient?")
                 .setPositiveButton("Yes", (dialog, which) -> deletePatient(patientId))
                 .setNegativeButton("No", null)
                 .show();
