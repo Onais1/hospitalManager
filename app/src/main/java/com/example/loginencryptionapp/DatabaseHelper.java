@@ -413,4 +413,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM patients");
         db.close();
     }
+
+    public void deleteAllDoctors() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM doctors");
+        db.close();
+
+    }
 }
