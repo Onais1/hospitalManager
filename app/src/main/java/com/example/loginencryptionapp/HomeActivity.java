@@ -10,18 +10,19 @@ import androidx.appcompat.app.AppCompatActivity;
 public class HomeActivity extends AppCompatActivity {
 
     private TextView tvWelcome;
-    private Button btnLogout, btnPatient, btnDoctorManagement; // Added btnDoctorManagement
+    private Button btnLogout, btnPatient, btnDoctorManagement, btnAppointments; // Added btnAppointments
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Initialize views
+        // Initialise views
         tvWelcome = findViewById(R.id.tv_welcome);
         btnLogout = findViewById(R.id.btn_logout);
         btnPatient = findViewById(R.id.btn_patient);
-        btnDoctorManagement = findViewById(R.id.btn_doctor_management); // Initialize the new button
+        btnDoctorManagement = findViewById(R.id.btn_doctor_management);
+        btnAppointments = findViewById(R.id.btn_appointments);
 
         // Get the username from Intent
         String username = getIntent().getStringExtra("username");
@@ -29,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
             tvWelcome.setText("Welcome, " + username + "!");
         }
 
-        // Navigate to PatientActivity
+        // Navigate to PatientManagementActivity
         btnPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +44,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, DoctorManagementActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Navigate to AppointmentsActivity
+        btnAppointments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AppointmentsActivity.class);
                 startActivity(intent);
             }
         });

@@ -3,43 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="20dp">
+    android:padding="16dp">
 
-    <!-- Welcome Text -->
+    <!-- Welcome Message -->
     <TextView
         android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome!"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:padding="10dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"/>
 
-    <!-- View Patients Button -->
+    <!-- Patient Management Button -->
     <Button
         android:id="@+id/btn_patient"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Patients"
-        android:layout_marginTop="20dp"
-        android:onClick="openPatientActivity"/>
+        android:text="Patient Management"
+        android:layout_marginBottom="16dp"/>
 
     <!-- Doctor Management Button -->
     <Button
         android:id="@+id/btn_doctor_management"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Doctor Management"
-        android:layout_marginTop="20dp"
-        android:onClick="openDoctorManagementActivity"/>
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Appointments Button -->
+    <Button
+        android:id="@+id/btn_appointments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Appointments"
+        android:layout_marginBottom="16dp"/>
 
     <!-- Logout Button -->
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"/>
+        android:text="Logout"/>
+
 </LinearLayout>

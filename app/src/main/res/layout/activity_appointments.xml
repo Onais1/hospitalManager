@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Patient Spinner -->
+    <Spinner
+        android:id="@+id/spinnerPatient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select Patient" />
+
+    <!-- Doctor Spinner -->
+    <Spinner
+        android:id="@+id/spinnerDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select Doctor" />
+
+    <!-- Date and Time Picker -->
+    <Button
+        android:id="@+id/btnDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Date and Time" />
+
+    <!-- Notes Input -->
+    <EditText
+        android:id="@+id/etNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Appointment Notes"
+        android:inputType="textMultiLine" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/btnSaveAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Appointment" />
+
+    <!-- ListView to Display Appointments -->
+    <ListView
+        android:id="@+id/listViewAppointments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

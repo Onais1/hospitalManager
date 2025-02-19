@@ -26,7 +26,7 @@ public class DoctorManagementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_management);
 
-        // Initialize views
+        // Initialise views
         etDoctorName = findViewById(R.id.etDoctorName);
         etDoctorSpecialization = findViewById(R.id.etDoctorSpecialization);
         etDoctorPhone = findViewById(R.id.etDoctorPhone);
@@ -35,7 +35,7 @@ public class DoctorManagementActivity extends AppCompatActivity {
         btnUpdateDoctor = findViewById(R.id.btnUpdateDoctor);
         lvDoctors = findViewById(R.id.lvDoctors);
 
-        // Initialize database helper
+        // Initialise database helper
         dbHelper = new DatabaseHelper(this);
 
         // Load doctors into the list
@@ -74,7 +74,7 @@ public class DoctorManagementActivity extends AppCompatActivity {
         lvDoctors.setOnItemLongClickListener((parent, view, position, id) -> {
             // Show a confirmation dialog before deleting
             showDeleteConfirmationDialog(position);
-            return true; // Consume the long-press event
+            return true; // Return true to indicate long-press event handled
         });
     }
 
@@ -142,13 +142,13 @@ public class DoctorManagementActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Delete Doctor")
                 .setMessage("Are you sure you want to delete this doctor?")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         deleteDoctor(position);
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton("No", null)
                 .show();
     }
 

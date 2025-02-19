@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Initialize views
+        // Initialise views
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
         etNINumber = findViewById(R.id.et_ninumber);
@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         tvDecryptResult = findViewById(R.id.tv_decrypt_result);
         tvLoginLink = findViewById(R.id.tv_login_link);
 
-        // Initialize DatabaseHelper
+        // Initialise DatabaseHelper
         databaseHelper = new DatabaseHelper(this);
 
         // Generate RSA key pair for encryption

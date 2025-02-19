@@ -28,7 +28,7 @@ public class PatientManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_management);
 
-        // Initialize views
+        // Initialise views
         etPatientName = findViewById(R.id.et_patient_name);
         etPatientAge = findViewById(R.id.et_patient_age);
         etPatientGender = findViewById(R.id.et_patient_gender);
@@ -36,10 +36,10 @@ public class PatientManagement extends AppCompatActivity {
         btnUpdatePatient = findViewById(R.id.btn_update_patient);
         lvPatients = findViewById(R.id.lv_patients);
 
-        // Initialize DatabaseHelper
+        // Initialise DatabaseHelper
         databaseHelper = new DatabaseHelper(this);
 
-        // Initialize patient list and adapter
+        // Initialise patient list and adapter
         patientList = databaseHelper.getAllPatients();
         patientAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, patientList);
         lvPatients.setAdapter(patientAdapter);
@@ -152,7 +152,7 @@ public class PatientManagement extends AppCompatActivity {
 
         new AlertDialog.Builder(this)
                 .setTitle("Delete Patient")
-                .setMessage("Are you sure you want to delete " + patientName + "?")
+                .setMessage("Are you sure you want to delete this Patient?")
                 .setPositiveButton("Yes", (dialog, which) -> deletePatient(patientId))
                 .setNegativeButton("No", null)
                 .show();
