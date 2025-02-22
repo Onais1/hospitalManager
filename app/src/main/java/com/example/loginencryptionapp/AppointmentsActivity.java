@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,9 +12,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AppointmentsActivity extends AppCompatActivity {
 
@@ -85,14 +88,32 @@ public class AppointmentsActivity extends AppCompatActivity {
         spinnerDoctor.setAdapter(adapter);
     }
 
-    // Load all appointments into the ListView
+    // Loads all appointments into the ListView
     private void loadAppointments() {
-        appointmentsList = dbHelper.getAllAppointments(); // Fetch all appointments
+        ArrayList<Appointment> appointments = dbHelper.getAllAppointments();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.getDefault());
+
+        appointmentsList = new ArrayList<>();
+
+        for (Appointment appointment : appointments) {
+            String formattedDate = sdf.format(new Date(appointment.getDateTime()));
+
+            String displayText = appointment.getId() + " - " +
+                    "Patient: " + appointment.getPatientName() + "\n" +
+                    "Doctor: " + appointment.getDoctorName() + "\n" +
+                    "Date: " + formattedDate + "\n" +
+                    "Notes: " + appointment.getNotes(); // Display decrypted notes
+
+            appointmentsList.add(displayText);
+        }
+
         appointmentsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, appointmentsList);
         listViewAppointments.setAdapter(appointmentsAdapter);
     }
 
-    // Show Date and Time Picker
+
+
+    // Shows Date and Time Picker
     private void showDateTimePicker() {
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -114,7 +135,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    // Save Appointment to Database
+    // Saves Appointment to Database
     private void saveAppointment() {
         // Get selected patient and doctor IDs
         String selectedPatient = spinnerPatient.getSelectedItem().toString();
@@ -126,13 +147,13 @@ public class AppointmentsActivity extends AppCompatActivity {
         // Get notes
         String notes = etNotes.getText().toString();
 
-        // Validate date and time
+        // Validates date and time
         if (selectedDateTime == 0) {
             Toast.makeText(this, "Please select a date and time", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Add appointment to database
+        // Adds appointment to database
         boolean isAdded = dbHelper.addAppointment(patientId, doctorId, selectedDateTime, notes);
         if (isAdded) {
             Toast.makeText(this, "Appointment added successfully", Toast.LENGTH_SHORT).show();
@@ -142,7 +163,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         }
     }
 
-    // Show confirmation dialog for deleting an appointment
+    // Shows confirmation dialog for deleting an appointment
     private void showDeleteConfirmationDialog(int appointmentId) {
         new AlertDialog.Builder(this)
                 .setTitle("Delete Appointment")
@@ -150,7 +171,7 @@ public class AppointmentsActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Delete the appointment
+                        // Deletes the appointment
                         boolean isDeleted = dbHelper.deleteAppointment(appointmentId);
                         if (isDeleted) {
                             Toast.makeText(AppointmentsActivity.this, "Appointment deleted", Toast.LENGTH_SHORT).show();

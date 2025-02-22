@@ -32,7 +32,7 @@ public class PatientManagementTest {
     public void setup() {
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         databaseHelper = new DatabaseHelper(context);
-        databaseHelper.deleteAllPatients(); // Clear existing patients before tests
+        databaseHelper.deleteAllPatients();
     }
 
     @Test

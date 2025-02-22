@@ -31,14 +31,14 @@ public class DoctorManagementTest {
     public void setup() {
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         databaseHelper = new DatabaseHelper(context);
-        databaseHelper.deleteAllDoctors(); // Clear existing doctors before tests
+        databaseHelper.deleteAllDoctors();
     }
 
     @Test
     public void testAddDoctor() {
         ActivityScenario.launch(DoctorManagementActivity.class);
 
-        // Add a new doctor
+        // Adds a new doctor
         onView(withId(R.id.etDoctorName)).perform(replaceText("Dr. Smith"), closeSoftKeyboard());
         onView(withId(R.id.etDoctorSpecialization)).perform(replaceText("Neurology"), closeSoftKeyboard());
         onView(withId(R.id.etDoctorPhone)).perform(replaceText("0987654321"), closeSoftKeyboard());

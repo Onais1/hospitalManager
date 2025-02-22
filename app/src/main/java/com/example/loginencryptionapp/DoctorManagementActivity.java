@@ -19,7 +19,7 @@ public class DoctorManagementActivity extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private ArrayList<Doctor> doctorList;
     private DoctorAdapter doctorAdapter;
-    private int selectedDoctorPosition = -1; // Track the selected doctor's position
+    private int selectedDoctorPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class DoctorManagementActivity extends AppCompatActivity {
 
         // ListView Item Click Listener
         lvDoctors.setOnItemClickListener((parent, view, position, id) -> {
-            // Track the selected doctor's position
+
             selectedDoctorPosition = position;
 
             // Populate the input fields with the selected doctor's details
@@ -72,7 +72,7 @@ public class DoctorManagementActivity extends AppCompatActivity {
 
         // ListView Long-Press Listener for Delete
         lvDoctors.setOnItemLongClickListener((parent, view, position, id) -> {
-            // Show a confirmation dialog before deleting
+
             showDeleteConfirmationDialog(position);
             return true; // Return true to indicate long-press event handled
         });
@@ -131,7 +131,7 @@ public class DoctorManagementActivity extends AppCompatActivity {
             Toast.makeText(this, "Doctor updated", Toast.LENGTH_SHORT).show();
             loadDoctors(); // Refresh the list
             clearFields();
-            selectedDoctorPosition = -1; // Reset selected position
+            selectedDoctorPosition = -1;
         } else {
             Toast.makeText(this, "Failed to update doctor", Toast.LENGTH_SHORT).show();
         }

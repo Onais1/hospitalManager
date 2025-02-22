@@ -2,7 +2,6 @@ package com.example.loginencryptionapp;
 
 import static org.junit.Assert.*;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.After;
@@ -20,7 +19,7 @@ public class DatabaseHelperTest {
     public void setUp() {
         context = ApplicationProvider.getApplicationContext();
         databaseHelper = new DatabaseHelper(context);
-        databaseHelper.clearDatabase(); // Clean DB before tests
+        databaseHelper.clearDatabase();
     }
 
     @After
