@@ -13,9 +13,13 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AppointmentsActivity extends AppCompatActivity {
 
@@ -87,10 +91,28 @@ public class AppointmentsActivity extends AppCompatActivity {
 
     // Load all appointments into the ListView
     private void loadAppointments() {
-        appointmentsList = dbHelper.getAllAppointments(); // Fetch all appointments
+        ArrayList<Appointment> appointments = dbHelper.getAllAppointments();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.getDefault());
+
+        appointmentsList = new ArrayList<>();
+
+        for (Appointment appointment : appointments) {
+            String formattedDate = sdf.format(new Date(appointment.getDateTime()));
+
+            String displayText = appointment.getId() + " - " +
+                    "Patient: " + appointment.getPatientName() + "\n" +
+                    "Doctor: " + appointment.getDoctorName() + "\n" +
+                    "Date: " + formattedDate + "\n" +
+                    "Notes: " + appointment.getNotes(); // Display decrypted notes
+
+            appointmentsList.add(displayText);
+        }
+
         appointmentsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, appointmentsList);
         listViewAppointments.setAdapter(appointmentsAdapter);
     }
+
+
 
     // Show Date and Time Picker
     private void showDateTimePicker() {

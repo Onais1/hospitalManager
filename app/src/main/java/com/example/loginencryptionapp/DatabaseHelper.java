@@ -10,7 +10,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Base64;
+
+
+//Encrypt notes imports
+import javax.crypto.Cipher;
+import android.util.Base64;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
+
+
+
+
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "hospital.db";
@@ -123,32 +136,67 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     /*** Appointment Manager Method ***/
 
+    // SK & IV stored in 16 char for AES_128 encryption
+    private static final String SECRET_KEY = "1234567890123456";
+    private static final String INIT_VECTOR = "abcdef9876543210";
+
+    // Encrypt notes using AES-128
+    private String encrypt(String value) {
+        try {
+            IvParameterSpec iv = new IvParameterSpec(INIT_VECTOR.getBytes("UTF-8"));
+            SecretKeySpec skeySpec = new SecretKeySpec(SECRET_KEY.getBytes("UTF-8"), "AES");
+
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
+
+            byte[] encrypted = cipher.doFinal(value.getBytes());
+            return Base64.encodeToString(encrypted, Base64.DEFAULT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Decrypt text using AES
+    private String decrypt(String encrypted) {
+        try {
+            IvParameterSpec iv = new IvParameterSpec(INIT_VECTOR.getBytes("UTF-8"));
+            SecretKeySpec skeySpec = new SecretKeySpec(SECRET_KEY.getBytes("UTF-8"), "AES");
+
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
+
+            byte[] original = cipher.doFinal(Base64.decode(encrypted, Base64.DEFAULT));
+            return new String(original);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     // Add a new appointment
     public boolean addAppointment(int patientId, int doctorId, long dateTime, String notes) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        // Hash the appointment notes
-        String salt = generateSalt();
-        String hashedNotes = hashPassword(notes, salt);
+        String encryptedNotes = encrypt(notes); // Encrypt the notes before storing
 
         values.put(COL_APPOINTMENT_PATIENT_ID, patientId);
         values.put(COL_APPOINTMENT_DOCTOR_ID, doctorId);
         values.put(COL_APPOINTMENT_DATE_TIME, dateTime);
-        values.put(COL_APPOINTMENT_NOTES, hashedNotes);
-        values.put(COL_APPOINTMENT_NOTES_SALT, salt);
+        values.put(COL_APPOINTMENT_NOTES, encryptedNotes); // Store encrypted notes
 
         long result = db.insert(TABLE_APPOINTMENTS, null, values);
         db.close();
         return result != -1;
     }
 
+
     // Retrieve all appointments for a doctor with patient and doctor names
-    public ArrayList<String> getAllAppointments() {
-        ArrayList<String> appointments = new ArrayList<>();
+    public ArrayList<Appointment> getAllAppointments() {
+        ArrayList<Appointment> appointments = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        // Query to join appointments with patients and doctors tables
         String query = "SELECT a." + COL_APPOINTMENT_ID + ", " +
                 "p." + COL_PATIENT_NAME + " AS patient_name, " +
                 "d." + COL_DOCTOR_NAME + " AS doctor_name, " +
@@ -166,17 +214,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String patientName = cursor.getString(cursor.getColumnIndexOrThrow("patient_name"));
                 String doctorName = cursor.getString(cursor.getColumnIndexOrThrow("doctor_name"));
                 long dateTime = cursor.getLong(cursor.getColumnIndexOrThrow(COL_APPOINTMENT_DATE_TIME));
-                String notes = cursor.getString(cursor.getColumnIndexOrThrow(COL_APPOINTMENT_NOTES));
+                String encryptedNotes = cursor.getString(cursor.getColumnIndexOrThrow(COL_APPOINTMENT_NOTES));
 
-                // Format the appointment details
-                String appointmentDetails = id + " - Patient: " + patientName + " - Doctor: " + doctorName + " - DateTime: " + dateTime + " - Notes: " + notes;
-                appointments.add(appointmentDetails);
+                String decryptedNotes = decrypt(encryptedNotes); // Decrypt notes for display
+
+                appointments.add(new Appointment(id, patientName, doctorName, dateTime, decryptedNotes));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return appointments;
     }
+
+
 
     // Check for overlapping appointments
     public boolean isAppointmentAvailable(int doctorId, long dateTime) {
@@ -381,8 +431,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private String generateSalt() {
         byte[] salt = new byte[16];
         new SecureRandom().nextBytes(salt);
-        return Base64.getEncoder().encodeToString(salt);
+        return Base64.encodeToString(salt, Base64.DEFAULT); //
     }
+
 
     private String hashPassword(String password, String salt) {
         try {
@@ -419,5 +470,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM doctors");
         db.close();
 
+    }
+
+    public void deleteAllAppointments() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM appointments");
+        db.close();
     }
 }
