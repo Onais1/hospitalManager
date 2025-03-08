@@ -1,4 +1,4 @@
-Hospital Management Application
+Secure Hospital Management Application with encryption. 
 
 Overview:
 I have developed an android application for managing a hospital, including a dedicated database, users, patients, doctors, and appointments. The project utilises SQLite for local data storage and implements encryption for sensitive data like appointment notes and user passwords.
